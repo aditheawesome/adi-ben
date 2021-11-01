@@ -6,7 +6,7 @@ insert into item values(1, "orange", 0.75);
 insert into item values(2, "bananas", 3);
 insert into item values(3, "watermelon", 2.5);
 insert into item values(4, "strawberries", 5);
-
+ 
 insert into phone_number values(0, "home");
 insert into phone_number values(1, "work");
 insert into phone_number values(2, "cell");
