@@ -20,7 +20,7 @@ def main():
   conn.commit()
   startchoice = int(input("Input 1 for creating membership, 2 for adding or removing items from the cart, 3 for viewing your cart, 4 for traditional purchasing, 5 for checking out your cart."))
   if startchoice == 1: 
-    membership()
+    createmembership()
   elif startchoice == 2:
     addrem()
   elif startchoice == 3:
@@ -32,7 +32,7 @@ def main():
     
       
 
-def membership():
+def createmembership():
   codeids = ["name", "age", "id", "card", "cphone", "wphone", "hphone", "haddress", "waddress", "gaddress"]
   values = ["name", "age", "wanted id", "card number", "cell phone number", "work phone number", "home phone number",  "home address" , "work address", "grandma's address"]
   tags = [0, 0, 0, 0, 0, 1, 1, 0, 1, 1] #1 is optional

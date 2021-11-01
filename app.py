@@ -12,7 +12,10 @@ def test():
   if request.method == "POST":
     hi = request.form["input"]
     return render_template("test.html", hi = hi)
-
+@app.route("/cart", methods = ["POST", "GET"])
+def cart():
+  return render_template("cart.html")
+  
 if __name__ == "__main__":
   app.run(debug = True)
 
