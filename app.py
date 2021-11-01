@@ -6,7 +6,8 @@ app = Flask(__name__)
 @app.route("/")
 def main():
   return render_template("main.html")
-@app.route("/test", methods = "POST", "GET")
+  
+@app.route("/test", methods = ["POST", "GET"])
 def test():
   if request.method = "POST":
     hi = request.form["sss"]
