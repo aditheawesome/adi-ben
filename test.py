@@ -14,11 +14,23 @@ def confluencecheck(table, id2, confluenceid, value):
   if value != "":
     confluence(str(table), str(id2), str(confluenceid), str(value))
 
-
-conn = sqlite3.connect("store.db");
-conn.execute("PRAGMA foreign_keys = 1")
-conn.commit()
-startchoice = int(input("Input 1 for creating membership, 2 for adding or removing items from the cart, 3 for viewing your cart, 4 for traditional purchasing, 5 for checking out your cart."))
+def main():
+  conn = sqlite3.connect("store.db");
+  conn.execute("PRAGMA foreign_keys = 1")
+  conn.commit()
+  startchoice = int(input("Input 1 for creating membership, 2 for adding or removing items from the cart, 3 for viewing your cart, 4 for traditional purchasing, 5 for checking out your cart."))
+  if startchoice == 1: 
+    membership()
+  elif startchoice == 2:
+    addrem()
+  elif startchoice == 3:
+    viewcart()
+  elif startchoice == 4:
+    classicalbuy()
+  elif startchoice == 5:
+    buycart()
+    
+      
 
 def membership():
   codeids = ["name", "age", "id", "card", "cphone", "wphone", "hphone", "haddress", "waddress", "gaddress"]
