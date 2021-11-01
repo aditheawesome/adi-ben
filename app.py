@@ -1,6 +1,4 @@
 from flask import Flask, request, render_template, redirect
-import test
-
 
 app = Flask(__name__)
 
@@ -11,3 +9,4 @@ def main():
 if __name__ == "__main__":
   app.run(debug = True)
 
+#update please
