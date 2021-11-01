@@ -9,7 +9,7 @@ def main():
   
 @app.route("/test", methods = ["POST", "GET"])
 def test():
-  if request.method = "POST":
+  if request.method == "POST":
     hi = request.form["sss"]
     return render_template("test.html", hi = hi)
 
