@@ -1,5 +1,12 @@
 import sqlite3
 import datetime
+from flask import request, redirect
+
+def requestforming(values, codeids):
+  results = {}
+  for i in range(0, len(values)):
+    results.update({codeids[i]: request.form[values[i]]})
+  return results
 
 def inputting(values, tags, codeids):
   results = {} #store stuff in a dictionary
@@ -8,14 +15,20 @@ def inputting(values, tags, codeids):
   return results
 
 def confluence(table, id2, confluenceid, value):
+  conn = sqlite3.connect("store.db")
+  conn.execute("PRAGMA foreign_keys = 1")
   conn.execute("INSERT INTO " + table + " values (" + id2 + ","+ confluenceid + ",\"" + value + "\")")
+  conn.commit()
+  conn.close()
+  return redirect('/')
 
 def confluencecheck(table, id2, confluenceid, value):
   if value != "":
     confluence(str(table), str(id2), str(confluenceid), str(value))
+  return ""
 
 def main():
-  conn = sqlite3.connect("store.db");
+  conn = sqlite3.connect("store.db")
   conn.execute("PRAGMA foreign_keys = 1")
   conn.commit()
   startchoice = int(input("Input 1 for creating membership, 2 for adding or removing items from the cart, 3 for viewing your cart, 4 for traditional purchasing, 5 for checking out your cart."))
@@ -33,14 +46,15 @@ def main():
       
 
 def createmembership():
+  conn = sqlite3.connect("store.db")
+  conn.execute("PRAGMA foreign_keys = 1")
+  conn.commit()
   codeids = ["name", "age", "id", "card", "cphone", "wphone", "hphone", "haddress", "waddress", "gaddress"]
-  values = ["name", "age", "wanted id", "card number", "cell phone number", "work phone number", "home phone number",  "home address" , "work address", "grandma's address"]
-  tags = [0, 0, 0, 0, 0, 1, 1, 0, 1, 1] #1 is optional
-  info = inputting(values, tags, codeids) 
+  values = ["name", "age", "id", "card", "cphone", "wphone", "hphone", "haddress", "waddress", "gaddress"]
+  info = requestforming(values, codeids)
   conn.execute("INSERT INTO customer values (" + info.get("id") + ",\"" + info.get("name") + "\"," + info.get("age") + ",\"" + info.get("card") + "\")")
   conn.commit()
 
-  print("membership created!")
   
   # confluence("c_number", info.get("id"), "2", info.get("cphone"))
   # confluence("c_address", info.get("id"), "0", info.get("haddress"))
@@ -56,8 +70,8 @@ def createmembership():
 
   conn.commit()
   conn.close()
-  print ("phone numbers and addresses inserted!")    
   
+  return ""
 def addrem():
   values = ["wanted item (0 for apple, 1 for orange, 2 for bananas, 3 for watermelon, 4 for strawberries)", "wanted amound of that item"]
   codeids = ["item", "amount"]

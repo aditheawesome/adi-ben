@@ -32,7 +32,6 @@ insert into c_address values (23456, 1, "333 C Drive");
 -- select * from corder;
 -- select * from customer_item;
 -- DELETE FROM customer_item WHERE cid = 19295;
-
 select * from item;
 select * from phone_number;
 select * from addr;
